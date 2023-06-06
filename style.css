@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-board {
+    --cell-size: 20vmin;  /* переменная для повторяющихся значений (для ширины ячейки)*/
+    --cell-gap: 2vmin;  /* переменная для повторяющихся значений (для отступов)*/
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, var(--cell-size));
+    grid-template-rows: repeat(4, var(--cell-size));
+    gap: var(--cell-gap);  /* отступы между ячейками */
+}
+/* ячейка */
+.cell {
+    background-color: #66776b;
+}
+/* плитка */
+.tile {
+    position: absolute;
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    font-size: 7.5vmin;
+    background-color: hsl(25, 60%, var(--bg-lightness)); /*Функция lightness используется для извлечения значения яркости*/
+    transition: 100ms;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+    margin: 20px;
+    background-color: #2a312c;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 30px;
+    font-family: 'comfortaa';
+}
