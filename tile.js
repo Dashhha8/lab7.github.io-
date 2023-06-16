@@ -24,18 +24,4 @@ export class Tile {
   removeFromDOM() {
     this.tileElement.remove();
   }
-
-  waitForTransitionEnd() {
-    return new Promise(resolve => {
-      this.tileElement.addEventListener(
-        "transitionend", resolve, { once: true });
-    });
-  }
-
-  waitForAnimationEnd() {
-    return new Promise(resolve => {
-      this.tileElement.addEventListener(
-        "animationend", resolve, { once: true });
-    });
-  }
 }
