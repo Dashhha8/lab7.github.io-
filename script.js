@@ -1,11 +1,11 @@
-import { Grid } from "./grid.js"; /* Сетка */
-import { Tile } from "./tile.js";
+import { Grid } from "./grid.js"; /*Сетка*/
+import { Tile } from "./tile.js"; /*плитка*/
 
 const gameBoard = document.getElementById("game-board");
 const grid = new Grid(gameBoard);  /*Grid- класс, который хранит все ячейки */
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
-setupInputOnce();
+setupInputOnce();/*ввод настроек один раз*/
 
 function setupInputOnce() {
     window.addEventListener("keydown", handleInput, { once: true });
@@ -54,75 +54,47 @@ function handleInput(event) {
         alert("Попробуйте снова!")
         return;
     }
-    setupInputOnce(); /*ввод настроек один раз*/
+    setupInputOnce();
 }
 
-function moveUp() {
-    slideTiles(grid.cellsGroupedByColumn);
-}
-function moveDown() {
-    slideTiles(grid.cellsGroupedByReversedColumn);
-}
-function moveLeft() {
-    slideTiles(grid.cellsGroupedByRow);
-}
-function moveRight() {
-    slideTiles(grid.cellsGroupedByReversedRow);
-}
+function moveUp() { slideTiles(grid.cellsGroupedByColumn); }
+function moveDown() { slideTiles(grid.cellsGroupedByReversedColumn); }
+function moveLeft() { slideTiles(grid.cellsGroupedByRow); }
+function moveRight() { slideTiles(grid.cellsGroupedByReversedRow); }
 
 function slideTiles(groupedCells) {
-
     groupedCells.forEach(group => slideTilesInGroup(group,));
-
-    grid.cells.forEach(cell => {
-        cell.hasTileForMerge() && cell.mergeTiles()
-    });
+    grid.cells.forEach(cell => { cell.hasTileForMerge() && cell.mergeTiles() });
 }
 
 function slideTilesInGroup(group,) {
     for (let i = 1; i < group.length; i++) {
-        if (group[i].isEmpty()) {
-            continue;
-        }
+        if (group[i].isEmpty()) { continue; }
 
         const cellWithTile = group[i];
         let targetCell;
         let j = i - 1;
+
         while (j >= 0 && group[j].canAccept(cellWithTile.linkedTile)) {
             targetCell = group[j];
             j--;
         }
 
-        if (!targetCell) {
-            continue;
-        }
+        if (!targetCell) { continue; }
 
-        if (targetCell.isEmpty()) {
-            targetCell.linkTile(cellWithTile.linkedTile);
-        }
-        else {
-            targetCell.linkTileForMerge(cellWithTile.linkedTile);
-        }
+        if (targetCell.isEmpty()) { targetCell.linkTile(cellWithTile.linkedTile); }
+
+        else { targetCell.linkTileForMerge(cellWithTile.linkedTile); }
 
         cellWithTile.unlinkTile();
     }
 }
 
-function canMoveUp() {
-    return canMove(grid.cellsGroupedByColumn);
-}
-function canMoveDown() {
-    return canMove(grid.cellsGroupedByReversedColumn);
-}
-function canMoveLeft() {
-    return canMove(grid.cellsGroupedByRow);
-}
-function canMoveRight() {
-    return canMove(grid.cellsGroupedByReversedRow);
-}
-function canMove(groupedCells) {
-    return groupedCells.some(group => canMoveInGroup(group));
-}
+function canMoveUp() { return canMove(grid.cellsGroupedByColumn); }
+function canMoveDown() { return canMove(grid.cellsGroupedByReversedColumn); }
+function canMoveLeft() { return canMove(grid.cellsGroupedByRow); }
+function canMoveRight() { return canMove(grid.cellsGroupedByReversedRow); }
+function canMove(groupedCells) { return groupedCells.some(group => canMoveInGroup(group)); }
 
 function canMoveInGroup(group) {
     return group.some((cell, index) => {
@@ -133,12 +105,14 @@ function canMoveInGroup(group) {
         if (cell.isEmpty()) {
             return false;
         }
-
         const targetCell = group[index - 1];
         return targetCell.canAccept(cell.linkedTile);
     });
 }
 
-button.addEventListener("botton", () => {
+const button = document.getElementsByTagName('button')[0]
+button.addEventListener('click', function () {
+    alert('Вы перезапустили игру!') 
     document.location.reload();
+   
 })
