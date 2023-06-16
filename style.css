@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+    box-sizing: border-box; /* учитывание обводки и отступы в ширине элемента */
     margin: 0;
 }
 
@@ -18,11 +18,11 @@ body {
     grid-template-rows: repeat(4, var(--cell-size));
     gap: var(--cell-gap);  /* отступы между ячейками */
 }
-/* ячейка */
+
 .cell {
     background-color: #66776b;
 }
-/* плитка */
+
 .tile {
     position: absolute;
     top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
@@ -41,7 +41,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 180px;
+    width: 200px;
     height: 50px;
     margin: 20px;
     background-color: #2a312c;
@@ -51,5 +51,5 @@ a {
     text-decoration: none;
     color: #ffffff;
     font-size: 30px;
-    font-family: 'comfortaa';
+    font-family:'Courier New', Courier, monospace;
 }
