@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box; /* учитывание обводки и отступы в ширине элемента */
+    box-sizing: border-box;
     margin: 0;
 }
 
@@ -10,22 +10,23 @@ body {
 }
 
 #game-board {
-    --cell-size: 20vmin;  /* переменная для повторяющихся значений (для ширины ячейки)*/
-    --cell-gap: 2vmin;  /* переменная для повторяющихся значений (для отступов)*/
+    --cell-size: 20vmin;/* переменная для повторяющихся значений (для ширины ячейки)*/
+    --cell-gap: 2vmin;/* переменная для повторяющихся значений (для отступов)*/
     position: relative;
     display: grid;
-    grid-template-columns: repeat(4, var(--cell-size));
-    grid-template-rows: repeat(4, var(--cell-size));
-    gap: var(--cell-gap);  /* отступы между ячейками */
+    grid-template-columns: repeat(4, var(--cell-size));/* столбцы */
+    grid-template-rows: repeat(4, var(--cell-size));/* строки */
+    gap: var(--cell-gap);/* отступы между ячейками */
 }
 
 .cell {
-    background-color: #66776b;
+    background-color: #9cada1;
 }
 
 .tile {
     position: absolute;
-    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap))); 
+    /* позиция плитки*(ширина ячейки+отступ между плитками) */
     left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)));
     display: flex;
     justify-content: center;
@@ -33,8 +34,9 @@ body {
     width: var(--cell-size);
     height: var(--cell-size);
     font-size: 7.5vmin;
-    background-color: hsl(25, 60%, var(--bg-lightness)); /*Функция lightness используется для извлечения значения яркости*/
-    transition: 100ms;
+    background-color: hsl(25, 60%, var(--bg-lightness));
+    /*Функция lightness используется для извлечения значения яркости*/
+    transition: 100ms; /* анимация перемещения */
 }
 
 .button {
@@ -44,12 +46,10 @@ body {
     width: 200px;
     height: 50px;
     margin: 20px;
-    background-color: #2a312c;
+    background-color: #5f6e63;
 }
-
 a {
     text-decoration: none;
     color: #ffffff;
     font-size: 30px;
-    font-family:'Courier New', Courier, monospace;
 }
